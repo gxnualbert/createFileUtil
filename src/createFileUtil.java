@@ -1,9 +1,6 @@
 import sun.org.mozilla.javascript.internal.ast.WhileLoop;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
 /**
  * Created by Administrator on 8/20/2016.
@@ -16,6 +13,8 @@ public class createFileUtil {
         String createFileName = dirName + "/" + fileName;
         createFile(createFileName);
         getFileInfo(createFileName);
+        WriteStringToFileByPrintStream(createFileName);
+        WriteStringToFileByFileWriter(createFileName);
 
     }
 
@@ -62,21 +61,33 @@ public class createFileUtil {
         System.out.println("File lengh: " + file.length());
     }
 
-    public static void WriteFile(String fileName) {
+    public static void WriteStringToFileByPrintStream(String filePath) {
         try {
-            File f = new File(fileName);
+            File f = new File(filePath);
             if (!f.exists()) {
                 f.createNewFile();
             }
             String writeString = "This is a test, you can add log, or anything you want to write!Thanks";
-
-            FileWriter fWriter = new FileWriter(writeString);
-            int is;
-
+            PrintStream ps= new PrintStream(new FileOutputStream(f));
+            ps.println(writeString);
+            ps.append("This is append string+q");
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+    }
+    public static void WriteStringToFileByFileWriter(String filePath){
+        try {
+            FileWriter fw=new FileWriter(filePath,true);
+            BufferedWriter bw=new BufferedWriter(fw);
+            bw.write("\r\nabc+cndsd\r\n");
+            bw.append("\r\nThis is bufferwiter append!!!\r\n");
+            bw.append("\nThis setence is for next line!!\n");
+            bw.close();
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 }
