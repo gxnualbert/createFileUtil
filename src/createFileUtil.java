@@ -15,6 +15,7 @@ public class createFileUtil {
         getFileInfo(createFileName);
         WriteStringToFileByPrintStream(createFileName);
         WriteStringToFileByFileWriter(createFileName);
+        WriteStringToFileByPrintWriter(createFileName);
 
     }
 
@@ -89,5 +90,16 @@ public class createFileUtil {
             e.printStackTrace();
         }
 
+    }
+    public static void WriteStringToFileByPrintWriter(String filePath){
+        PrintWriter pw= null;
+        try {
+            pw = new PrintWriter(new FileWriter(filePath,true));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        pw.append("\nWite string to file by print writer. Print writer will send the string to FileWriter, and then File Writer write string to file");
+        pw.append("\n this is aoend");
+        pw.close();
     }
 }
