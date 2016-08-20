@@ -11,6 +11,7 @@ public class createFileUtil {
         String fileName="javatestfile.txt";
         String  createFileName=dirName+"/"+fileName;
         createFile(createFileName);
+        getFileInfo(createFileName);
     }
 
     /*Create a file, doesn't specify the path*/
@@ -48,6 +49,12 @@ public class createFileUtil {
             System.out.println("fail to create directory");
             return  false;
         }
+    }
+    public  static  void getFileInfo(String fileName){
+        File file=new File(fileName);
+        System.out.println("File Name: "+file.getName());
+        System.out.println("File Path: "+file.getAbsolutePath());
+        System.out.println("File lengh: "+file.length());
     }
 
 }
