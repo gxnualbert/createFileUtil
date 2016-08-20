@@ -1,4 +1,8 @@
+import sun.org.mozilla.javascript.internal.ast.WhileLoop;
+
 import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
 /**
@@ -6,12 +10,13 @@ import java.io.IOException;
  */
 public class createFileUtil {
     public static void main(String[] args) {
-        String dirName="c:/javaDir";
+        String dirName = "c:/javaDir";
         createDir(dirName);
-        String fileName="javatestfile.txt";
-        String  createFileName=dirName+"/"+fileName;
+        String fileName = "javatestfile.txt";
+        String createFileName = dirName + "/" + fileName;
         createFile(createFileName);
         getFileInfo(createFileName);
+
     }
 
     /*Create a file, doesn't specify the path*/
@@ -36,25 +41,42 @@ public class createFileUtil {
     }
 
     public static boolean createDir(String destDirName) {
-        File dir=new File(destDirName);
-        if (dir.exists()){
-            System.out.println("The directory "+dir.getName()+" already exist, no need to create");
+        File dir = new File(destDirName);
+        if (dir.exists()) {
+            System.out.println("The directory " + dir.getName() + " already exist, no need to create");
             return false;
         }
-        if (dir.mkdir()){
-            System.out.println("create directory successfully, the path is "+dir.getAbsolutePath());
+        if (dir.mkdir()) {
+            System.out.println("create directory successfully, the path is " + dir.getAbsolutePath());
             return true;
-        }
-        else{
+        } else {
             System.out.println("fail to create directory");
-            return  false;
+            return false;
         }
-    }
-    public  static  void getFileInfo(String fileName){
-        File file=new File(fileName);
-        System.out.println("File Name: "+file.getName());
-        System.out.println("File Path: "+file.getAbsolutePath());
-        System.out.println("File lengh: "+file.length());
     }
 
+    public static void getFileInfo(String fileName) {
+        File file = new File(fileName);
+        System.out.println("File Name: " + file.getName());
+        System.out.println("File Path: " + file.getAbsolutePath());
+        System.out.println("File lengh: " + file.length());
+    }
+
+    public static void WriteFile(String fileName) {
+        try {
+            File f = new File(fileName);
+            if (!f.exists()) {
+                f.createNewFile();
+            }
+            String writeString = "This is a test, you can add log, or anything you want to write!Thanks";
+
+            FileWriter fWriter = new FileWriter(writeString);
+            int is;
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
 }
