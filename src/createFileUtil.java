@@ -9,13 +9,14 @@ public class createFileUtil {
     public static void main(String[] args) {
         String dirName = "c:/javaDir";
         createDir(dirName);
-        String fileName = "javatestfile.txt";
+        String fileName = "javaTestFile.txt";
         String createFileName = dirName + "/" + fileName;
         createFile(createFileName);
         getFileInfo(createFileName);
         WriteStringToFileByPrintStream(createFileName);
         WriteStringToFileByFileWriter(createFileName);
         WriteStringToFileByPrintWriter(createFileName);
+//        WrtieStringToFileByRandomAccessFile(createFileName);
 
     }
 
@@ -59,7 +60,7 @@ public class createFileUtil {
         File file = new File(fileName);
         System.out.println("File Name: " + file.getName());
         System.out.println("File Path: " + file.getAbsolutePath());
-        System.out.println("File lengh: " + file.length());
+        System.out.println("File length: " + file.length());
     }
 
     public static void WriteStringToFileByPrintStream(String filePath) {
@@ -68,22 +69,33 @@ public class createFileUtil {
             if (!f.exists()) {
                 f.createNewFile();
             }
-            String writeString = "This is a test, you can add log, or anything you want to write!Thanks";
-            PrintStream ps= new PrintStream(new FileOutputStream(f));
+            String writeString = "2. Print Stream\n";
+            String writeString2="This String is write by Print Stream.\n";
+            PrintStream ps = new PrintStream(new FileOutputStream(f));
             ps.println(writeString);
-            ps.append("This is append string+q");
+//            ps.append("This is append By Print Stream\n");
+            ps.println("This is append By Print Stream\n");
+            ps.println(writeString2);
+            ps.println("\n");
         } catch (IOException e) {
             e.printStackTrace();
         }
 
     }
-    public static void WriteStringToFileByFileWriter(String filePath){
+
+    public static void WriteStringToFileByFileWriter(String filePath) {
         try {
-            FileWriter fw=new FileWriter(filePath,true);
-            BufferedWriter bw=new BufferedWriter(fw);
-            bw.write("\r\nabc+cndsd\r\n");
-            bw.append("\r\nThis is bufferwiter append!!!\r\n");
-            bw.append("\nThis setence is for next line!!\n");
+            FileWriter fw = new FileWriter(filePath, true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write("3. File Writeer");
+            bw.newLine();
+            bw.append("This is add by File Writer");
+            bw.newLine();
+            bw.append("Add text by append function");
+            bw.newLine();
+            bw.append("BufferedWriter can not use \\n to new line, it need .newLine() function");
+            bw.newLine();
+            bw.newLine();
             bw.close();
             fw.close();
         } catch (IOException e) {
@@ -91,15 +103,34 @@ public class createFileUtil {
         }
 
     }
-    public static void WriteStringToFileByPrintWriter(String filePath){
-        PrintWriter pw= null;
+
+    public static void WriteStringToFileByPrintWriter(String filePath) {
+        PrintWriter pw = null;
         try {
-            pw = new PrintWriter(new FileWriter(filePath,true));
+            pw = new PrintWriter(new FileWriter(filePath, true));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        pw.append("\nWite string to file by print writer. Print writer will send the string to FileWriter, and then File Writer write string to file");
-        pw.append("\n this is aoend");
+        pw.append("\n");
+        pw.append("\n4.Print Writer ");
+        pw.append("\nWrite String to file by print writer.");
+        pw.append("\nPrint writer will send the string to FileWriter");
+        pw.append("\nand then File Writer write string to file");
+        pw.append("\n this is apend");
         pw.close();
+    }
+
+    public static void WrtieStringToFileByRandomAccessFile(String filePath) {
+        try {
+            RandomAccessFile raf=new RandomAccessFile(filePath,"rw");
+            raf.writeBytes("\n1. Random Access File");
+            raf.writeBytes("\nThe string is write by random access file class");
+            raf.writeBytes("\nPlease note that, when you finished, you need to add close");
+            raf.writeBytes("\n");
+            raf.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 }
