@@ -111,12 +111,13 @@ public class createFileUtil {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        pw.append("\n");
-        pw.append("\n4.Print Writer ");
-        pw.append("\nWrite String to file by print writer.");
-        pw.append("\nPrint writer will send the string to FileWriter");
-        pw.append("\nand then File Writer write string to file");
-        pw.append("\n this is apend");
+        pw.append("\r\n");
+        pw.append("4.Print Writer \r\n");
+        pw.append("Write String to file by print writer. \r\n");
+        pw.append("Print writer will send the string to FileWriter \r\n");
+        pw.append("and then File Writer write string to file\r\n");
+        pw.append("this is apend\r\n");
+        pw.append("Please note that, if you want to new new line, you need to use \\r\\n, only \n will fail to new line");
         pw.close();
     }
 
